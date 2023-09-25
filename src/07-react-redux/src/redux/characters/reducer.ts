@@ -3,12 +3,14 @@ import {
   CharactersAction,
   CharactersState,
   SetCharacterPayload,
+  SetErrorPayload,
   SetLoadingPayload,
 } from "./types.ts";
 
 const initialState: CharactersState = {
   characters: {},
   loading: {},
+  error: {},
 };
 
 export const reducer = (
@@ -23,6 +25,16 @@ export const reducer = (
           ...state.loading,
           [(action.payload as SetLoadingPayload).index]: (
             action.payload as SetLoadingPayload
+          ).value,
+        },
+      };
+    case actionTypes.SET_ERROR:
+      return {
+        ...state,
+        error: {
+          ...state.error,
+          [(action.payload as SetErrorPayload).index]: (
+            action.payload as SetErrorPayload
           ).value,
         },
       };
