@@ -1,9 +1,9 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { counterChangeColor } from "../redux/counter/actions.ts";
+import { counterChangeColor } from "../redux/counter/reducer.ts";
 import { AppState } from "../redux/store.ts";
 import { CounterColor } from "../redux/counter/types.ts";
-import { ThemeModes, ThemeState } from "../redux/theme/types.ts";
+import { ThemeState } from "../redux/theme/types.ts";
 import { COLORS } from "../constants/colors.ts";
 
 type Props = {
@@ -20,7 +20,7 @@ class RadioButton extends Component<Props> {
     return (
       <label
         style={{
-          color: theme === ThemeModes.Light ? COLORS.black : COLORS.white,
+          color: theme === ThemeState.Light ? COLORS.black : COLORS.white,
         }}
       >
         <input

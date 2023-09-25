@@ -1,22 +1,23 @@
 import {
-  actionTypes,
-  CharactersAction,
+  CharactersSetCharacterAction,
+  CharactersSetLoadingAction,
   CharactersState,
+  FetchCharactersThunkAction,
   SetCharacterPayload,
   SetLoadingPayload,
 } from "./types.ts";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: CharactersState = {
   characters: {},
   loading: {},
 };
 
-export const reducer = (
-  state = initialState,
-  action: CharactersAction,
-): CharactersState => {
-  switch (action.type) {
-    case actionTypes.SET_LOADING:
+export const charactersSlice = createSlice({
+  name: "characters",
+  initialState,
+  reducers: {
+    setLoading(state: CharactersState, action: CharactersSetLoadingAction) {
       return {
         ...state,
         loading: {
@@ -26,7 +27,8 @@ export const reducer = (
           ).value,
         },
       };
-    case actionTypes.SET_CHARACTER:
+    },
+    setCharacter(state: CharactersState, action: CharactersSetCharacterAction) {
       return {
         ...state,
         characters: {
@@ -36,9 +38,30 @@ export const reducer = (
           ).imgSrc,
         },
       };
-    case actionTypes.RESET_CHARACTERS:
+    },
+    resetCharacters() {
       return initialState;
-    default:
-      return state;
-  }
-};
+    },
+  },
+});
+
+export const thunkFetchCharacters =
+  (payload: number): FetchCharactersThunkAction =>
+  async (dispatch) => {
+    payload > 0 &&
+      Array.from(Array(payload).keys()).map(async (_el, i) => {
+        dispatch(setLoading({ index: i, value: true }));
+        await fetch(
+          `https://rickandmortyapi.com/api/character/${
+            Math.floor(Math.random() * 824) + 1
+          }`,
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            dispatch(setCharacter({ index: i, imgSrc: data.image }));
+          });
+      });
+  };
+
+export const { setLoading, setCharacter, resetCharacters } =
+  charactersSlice.actions;

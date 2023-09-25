@@ -1,15 +1,16 @@
-import { actionTypes, ThemeAction, ThemeModes, ThemeState } from "./types.ts";
+import { ThemeState } from "./types.ts";
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: ThemeState = ThemeModes.Dark;
+const initialState = ThemeState.Dark as ThemeState;
 
-export const reducer = (
-  state = initialState,
-  action: ThemeAction,
-): ThemeState => {
-  switch (action.type) {
-    case actionTypes.TOGGLE_THEME:
-      return state === ThemeModes.Dark ? ThemeModes.Light : ThemeModes.Dark;
-    default:
-      return state;
-  }
-};
+export const themeSlice = createSlice({
+  name: "theme",
+  initialState,
+  reducers: {
+    toggleTheme(state: ThemeState) {
+      return state === ThemeState.Dark ? ThemeState.Light : ThemeState.Dark;
+    },
+  },
+});
+
+export const { toggleTheme } = themeSlice.actions;

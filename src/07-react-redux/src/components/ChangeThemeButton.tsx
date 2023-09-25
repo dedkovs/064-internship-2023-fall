@@ -1,4 +1,4 @@
-import { toggleTheme } from "../redux/theme/actions.ts";
+import { toggleTheme } from "../redux/theme/reducer.ts";
 import { useDispatch } from "react-redux";
 
 export const ChangeThemeButton = () => {

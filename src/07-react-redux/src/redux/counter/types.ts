@@ -1,12 +1,6 @@
-import { counterChangeColor, counterIncrement } from "./actions.ts";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AppState } from "../store.ts";
 import { CharactersAction } from "../characters/types.ts";
-
-export const actionTypes = {
-  INCREMENT: "INCREMENT",
-  CHANGE_COLOR: "CHANGE_COLOR",
-};
 
 export enum CounterColor {
   Red = "Red",
@@ -19,9 +13,11 @@ export type CounterState = {
   color: CounterColor;
 };
 
-export type CounterAction =
-  | ReturnType<typeof counterIncrement>
-  | ReturnType<typeof counterChangeColor>;
+export type CounterIncrementAction = { type: string; payload: number };
+
+export type CounterChangeColorAction = { type: string; payload: CounterColor };
+
+export type CounterAction = CounterIncrementAction | CounterChangeColorAction;
 
 export type CounterIncrementThunkAction = ThunkAction<
   void,

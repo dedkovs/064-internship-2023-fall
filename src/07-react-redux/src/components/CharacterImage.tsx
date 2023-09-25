@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { themeSelector } from "../redux/theme/selectors.ts";
-import { ThemeModes } from "../redux/theme/types.ts";
+import { ThemeState } from "../redux/theme/types.ts";
 import { COLORS } from "../constants/colors.ts";
-import { setLoading } from "../redux/characters/actions.ts";
+import { setLoading } from "../redux/characters/reducer.ts";
 
 type Props = {
   character: string;
@@ -20,7 +20,7 @@ export const CharacterImage = ({ character, loading, index }: Props) => {
       className={"characterImageContainer"}
       style={{
         backgroundColor:
-          theme === ThemeModes.Light ? COLORS.lightGrey : COLORS.darkGrey,
+          theme === ThemeState.Light ? COLORS.lightGrey : COLORS.darkGrey,
       }}
     >
       <div

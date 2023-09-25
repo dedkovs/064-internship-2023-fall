@@ -1,28 +1,44 @@
 import {
+  CounterChangeColorAction,
   CounterColor,
+  CounterIncrementAction,
+  CounterIncrementThunkAction,
   CounterState,
-  actionTypes,
-  CounterAction,
 } from "./types.ts";
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  resetCharacters,
+  thunkFetchCharacters,
+} from "../characters/reducer.ts";
 
 const initialState: CounterState = {
   value: 0,
   color: CounterColor.Red,
 };
 
-export const reducer = (
-  state = initialState,
-  action: CounterAction,
-): CounterState => {
-  switch (action.type) {
-    case actionTypes.INCREMENT:
+export const counterSlice = createSlice({
+  name: "counter",
+  initialState,
+  reducers: {
+    counterIncrement(state: CounterState, action: CounterIncrementAction) {
       return {
         ...state,
-        value: state.value + (action.payload as number),
+        value: state.value + action.payload,
       };
-    case actionTypes.CHANGE_COLOR:
-      return { ...state, color: action.payload as CounterColor };
-    default:
-      return state;
-  }
-};
+    },
+    counterChangeColor(state: CounterState, action: CounterChangeColorAction) {
+      return { ...state, color: action.payload };
+    },
+  },
+});
+
+export const thunkCounterIncrement =
+  (payload: number): CounterIncrementThunkAction =>
+  (dispatch, getState) => {
+    dispatch(resetCharacters());
+    const numberOfCharacters = getState().counter.value + payload;
+    dispatch(thunkFetchCharacters(numberOfCharacters));
+    dispatch(counterIncrement(payload));
+  };
+
+export const { counterIncrement, counterChangeColor } = counterSlice.actions;

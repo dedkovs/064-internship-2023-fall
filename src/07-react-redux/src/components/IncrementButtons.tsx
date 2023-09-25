@@ -1,4 +1,4 @@
-import { thunkCounterIncrement } from "../redux/counter/actions.ts";
+import { thunkCounterIncrement } from "../redux/counter/reducer.ts";
 import { useDispatch } from "react-redux";
 import { CounterIncrementThunkDispatch } from "../redux/counter/types.ts";
 

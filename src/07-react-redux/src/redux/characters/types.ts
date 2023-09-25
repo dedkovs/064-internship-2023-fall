@@ -1,12 +1,5 @@
-import { resetCharacters, setCharacter, setLoading } from "./actions.ts";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AppState } from "../store.ts";
-
-export const actionTypes = {
-  SET_LOADING: "SET_LOADING",
-  SET_CHARACTER: "SET_CHARACTER",
-  RESET_CHARACTERS: "RESET_CHARACTERS",
-};
 
 export type Loading = { [p: number]: boolean };
 export type SetLoadingPayload = {
@@ -25,10 +18,22 @@ export type CharactersState = {
   loading: Loading;
 };
 
+export type CharactersSetLoadingAction = {
+  type: string;
+  payload: SetLoadingPayload;
+};
+
+export type CharactersSetCharacterAction = {
+  type: string;
+  payload: SetCharacterPayload;
+};
+
+export type CharactersResetCharactersAction = { type: string };
+
 export type CharactersAction =
-  | ReturnType<typeof setLoading>
-  | ReturnType<typeof setCharacter>
-  | (ReturnType<typeof resetCharacters> & { payload?: null });
+  | CharactersSetLoadingAction
+  | CharactersSetCharacterAction
+  | CharactersResetCharactersAction;
 
 export type FetchCharactersThunkAction = ThunkAction<
   void,

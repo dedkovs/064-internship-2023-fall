@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { thunkFetchCharacters } from "../redux/characters/actions.ts";
+import { thunkFetchCharacters } from "../redux/characters/reducer.ts";
 import { FetchCharactersThunkDispatch } from "../redux/characters/types.ts";
 import { counterValueSelector } from "../redux/counter/selectors.ts";
 
