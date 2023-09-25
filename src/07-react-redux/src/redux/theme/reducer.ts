@@ -1,6 +1,6 @@
-import { actionTypes, ThemeAction, ThemeModes, ThemeState } from "./types.ts";
+import { actionTypes, ThemeAction, ThemeState } from "./types.ts";
 
-const initialState: ThemeState = ThemeModes.Dark;
+const initialState: ThemeState = ThemeState.Dark;
 
 export const reducer = (
   state = initialState,
@@ -8,7 +8,7 @@ export const reducer = (
 ): ThemeState => {
   switch (action.type) {
     case actionTypes.TOGGLE_THEME:
-      return state === ThemeModes.Dark ? ThemeModes.Light : ThemeModes.Dark;
+      return state === ThemeState.Dark ? ThemeState.Light : ThemeState.Dark;
     default:
       return state;
   }

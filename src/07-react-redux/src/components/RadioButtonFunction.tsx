@@ -1,4 +1,4 @@
-import { ThemeModes } from "../redux/theme/types.ts";
+import { ThemeState } from "../redux/theme/types.ts";
 import { COLORS } from "../constants/colors.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { CounterColor } from "../redux/counter/types.ts";
@@ -18,7 +18,7 @@ export const RadioButtonFunction = ({ color }: Props) => {
   return (
     <label
       style={{
-        color: theme === ThemeModes.Light ? COLORS.black : COLORS.white,
+        color: theme === ThemeState.Light ? COLORS.black : COLORS.white,
       }}
     >
       <input

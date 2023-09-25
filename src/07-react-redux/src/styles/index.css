@@ -116,3 +116,8 @@ button {
   border-radius: 8px;
   overflow: hidden;
 }
+
+.errorIcon {
+  position: absolute;
+  margin: 10px;
+}
