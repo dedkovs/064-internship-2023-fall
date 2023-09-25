@@ -7,6 +7,12 @@ export type SetLoadingPayload = {
   value: boolean;
 };
 
+export type Error = { [p: number]: boolean };
+export type SetErrorPayload = {
+  index: number;
+  value: boolean;
+};
+
 export type Characters = { [p: number]: string };
 export type SetCharacterPayload = {
   index: number;
@@ -16,11 +22,17 @@ export type SetCharacterPayload = {
 export type CharactersState = {
   characters: Characters;
   loading: Loading;
+  error: Error;
 };
 
 export type CharactersSetLoadingAction = {
   type: string;
   payload: SetLoadingPayload;
+};
+
+export type CharactersSetErrorAction = {
+  type: string;
+  payload: SetErrorPayload;
 };
 
 export type CharactersSetCharacterAction = {
@@ -32,6 +44,7 @@ export type CharactersResetCharactersAction = { type: string };
 
 export type CharactersAction =
   | CharactersSetLoadingAction
+  | CharactersSetErrorAction
   | CharactersSetCharacterAction
   | CharactersResetCharactersAction;
 
