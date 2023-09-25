@@ -1,26 +1,29 @@
 import { CharacterImage } from "./CharacterImage.tsx";
-import { Dispatch, SetStateAction } from "react";
+import { useSelector } from "react-redux";
+import {
+  charactersSelector,
+  loadingSelector,
+} from "../redux/characters/selectors.ts";
+import { counterValueSelector } from "../redux/counter/selectors.ts";
 
-type Props = {
-  characters: { [p: number]: string };
-  loading: { [p: number]: boolean };
-  setLoading: Dispatch<SetStateAction<{ [p: number]: boolean }>>;
-};
+export const CharacterImages = () => {
+  const characters = useSelector(charactersSelector);
+  const loading = useSelector(loadingSelector);
+  const counter = useSelector(counterValueSelector);
 
-export const CharacterImages = ({ characters, loading, setLoading }: Props) => {
   return (
     <div className={"characterImagesContainer"}>
-      {Object.keys(characters).map((character, i) => {
-        return (
-          <CharacterImage
-            key={character}
-            loading={loading[i]}
-            character={characters[i]}
-            setLoading={setLoading}
-            index={i}
-          />
-        );
-      })}
+      {counter > 0 &&
+        Array.from(Array(counter).keys()).map((character, i) => {
+          return (
+            <CharacterImage
+              key={character}
+              loading={loading[i]}
+              character={characters[i]}
+              index={i}
+            />
+          );
+        })}
     </div>
   );
 };

@@ -1,23 +1,19 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { themeSelector } from "../redux/theme/selectors.ts";
 import { ThemeModes } from "../redux/theme/types.ts";
-import { Dispatch, SetStateAction } from "react";
 import { COLORS } from "../constants/colors.ts";
+import { setLoading } from "../redux/characters/actions.ts";
 
 type Props = {
   character: string;
   loading: boolean;
-  setLoading: Dispatch<SetStateAction<{ [p: number]: boolean }>>;
   index: number;
 };
 
-export const CharacterImage = ({
-  character,
-  loading,
-  setLoading,
-  index,
-}: Props) => {
+export const CharacterImage = ({ character, loading, index }: Props) => {
   const theme = useSelector(themeSelector);
+
+  const dispatch = useDispatch();
 
   return (
     <div
@@ -34,7 +30,7 @@ export const CharacterImage = ({
       <img
         style={{ visibility: loading ? "hidden" : "visible" }}
         src={character}
-        onLoad={() => setLoading((l) => ({ ...l, [index]: false }))}
+        onLoad={() => dispatch(setLoading({ index, value: false }))}
         width={100}
         height={100}
         alt={""}

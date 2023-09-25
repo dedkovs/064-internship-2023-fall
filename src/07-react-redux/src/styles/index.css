@@ -68,7 +68,7 @@ button {
   }
 }
 
-.incrementButtonsContainer {
+.buttonsContainer {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -104,7 +104,6 @@ button {
 .characterImagesContainer {
   display: flex;
   gap: 20px;
-  width: 340px;
   margin: 0 auto;
   flex-wrap: wrap;
   justify-content: center;
