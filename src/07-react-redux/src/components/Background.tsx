@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { useSelector } from "react-redux";
 import { themeSelector } from "../redux/theme/selectors.ts";
-import { ThemeModes } from "../redux/theme/types.ts";
+import { ThemeState } from "../redux/theme/types.ts";
 import { COLORS } from "../constants/colors.ts";
 
 export const Background = ({ children }: { children: ReactNode }) => {
@@ -12,7 +12,7 @@ export const Background = ({ children }: { children: ReactNode }) => {
       className={"background"}
       style={{
         backgroundColor:
-          theme === ThemeModes.Light ? COLORS.white : COLORS.black,
+          theme === ThemeState.Light ? COLORS.white : COLORS.black,
       }}
     >
       {children}
