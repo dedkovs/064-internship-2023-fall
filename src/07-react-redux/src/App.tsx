@@ -2,8 +2,7 @@ import { Background } from "./components/Background.tsx";
 import { Counter } from "./components/Counter.tsx";
 import { RadioButtons } from "./components/RadioButtons.tsx";
 import { IncrementButtons } from "./components/IncrementButtons.tsx";
-import { ChangeThemeButton } from "./components/ChangeThemeButton.tsx";
-import { FetchCharactersButton } from "./components/FetchCharactersButton.tsx";
+import { ActionButtons } from "./components/ActionButtons.tsx";
 import { useCallback, useEffect, useState } from "react";
 import { CharacterImages } from "./components/CharacterImages.tsx";
 import { fetchCharacters } from "./utilities/fetchCharacters.ts";
@@ -39,7 +38,7 @@ function App() {
       <Counter />
       <RadioButtons />
       <IncrementButtons />
-      <ChangeThemeButton />
+      <ActionButtons fetchCharacters={fetch} />
       <CharacterImages
         characters={characters}
         loading={loading}
@@ -47,7 +46,6 @@ function App() {
         error={error}
         setError={setError}
       />
-      <FetchCharactersButton fetchCharacters={fetch} />
     </Background>
   );
 }

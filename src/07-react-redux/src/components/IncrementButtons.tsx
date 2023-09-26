@@ -5,7 +5,7 @@ export const IncrementButtons = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className={"incrementButtonsContainer"}>
+    <div className={"buttonsContainer"}>
       <button onClick={() => dispatch(counterIncrement(-10))}>-10</button>
       <button onClick={() => dispatch(counterIncrement(-1))}>-1</button>
       <button onClick={() => dispatch(counterIncrement(1))}>+1</button>
