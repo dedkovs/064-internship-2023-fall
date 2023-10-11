@@ -1,10 +1,10 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { counterChangeColor } from "../redux/counter/reducer.ts";
-import { AppState } from "../redux/store.ts";
-import { CounterColor } from "../redux/counter/types.ts";
-import { ThemeState } from "../redux/theme/types.ts";
-import { COLORS } from "../constants/colors.ts";
+import { counterChangeColor } from "../../redux/counter/reducer.ts";
+import { AppState } from "../../redux/store.ts";
+import { CounterColor } from "../../redux/counter/types.ts";
+import { ThemeState } from "../../redux/theme/types.ts";
+import { COLORS } from "../../constants/colors.ts";
 
 type Props = {
   color: CounterColor;

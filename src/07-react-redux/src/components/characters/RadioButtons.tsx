@@ -1,5 +1,5 @@
 import { RadioButton } from "./RadioButton.tsx";
-import { CounterColor } from "../redux/counter/types.ts";
+import { CounterColor } from "../../redux/counter/types.ts";
 
 export const RadioButtons = () => {
   return (

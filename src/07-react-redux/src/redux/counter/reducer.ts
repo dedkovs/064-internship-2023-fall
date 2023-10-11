@@ -2,14 +2,9 @@ import {
   CounterChangeColorAction,
   CounterColor,
   CounterIncrementAction,
-  CounterIncrementThunkAction,
   CounterState,
 } from "./types.ts";
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  resetCharacters,
-  thunkFetchCharacters,
-} from "../characters/reducer.ts";
 
 const initialState: CounterState = {
   value: 0,
@@ -31,14 +26,5 @@ export const counterSlice = createSlice({
     },
   },
 });
-
-export const thunkCounterIncrement =
-  (payload: number): CounterIncrementThunkAction =>
-  (dispatch, getState) => {
-    dispatch(resetCharacters());
-    const numberOfCharacters = getState().counter.value + payload;
-    dispatch(thunkFetchCharacters(numberOfCharacters));
-    dispatch(counterIncrement(payload));
-  };
 
 export const { counterIncrement, counterChangeColor } = counterSlice.actions;

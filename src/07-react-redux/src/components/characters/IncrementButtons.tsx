@@ -1,0 +1,15 @@
+import { counterIncrement } from "../../redux/counter/reducer.ts";
+import { useDispatch } from "react-redux";
+
+export const IncrementButtons = () => {
+  const dispatch = useDispatch();
+
+  return (
+    <div className={"buttonsContainer"}>
+      <button onClick={() => dispatch(counterIncrement(-10))}>-10</button>
+      <button onClick={() => dispatch(counterIncrement(-1))}>-1</button>
+      <button onClick={() => dispatch(counterIncrement(1))}>+1</button>
+      <button onClick={() => dispatch(counterIncrement(10))}>+10</button>
+    </div>
+  );
+};

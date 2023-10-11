@@ -1,9 +1,10 @@
 import { Background } from "./components/Background.tsx";
-import { Counter } from "./components/Counter.tsx";
-import { RadioButtons } from "./components/RadioButtons.tsx";
-import { IncrementButtons } from "./components/IncrementButtons.tsx";
-import { CharacterImages } from "./components/CharacterImages.tsx";
-import { ActionButtons } from "./components/ActionButtons.tsx";
+import { Counter } from "./components/characters/Counter.tsx";
+import { RadioButtons } from "./components/characters/RadioButtons.tsx";
+import { IncrementButtons } from "./components/characters/IncrementButtons.tsx";
+import { CharacterImages } from "./components/characters/CharacterImages.tsx";
+import { ActionButtons } from "./components/characters/ActionButtons.tsx";
+import { Messages } from "./components/messages/Messages.tsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <IncrementButtons />
       <ActionButtons />
       <CharacterImages />
+      <Messages />
     </Background>
   );
 }

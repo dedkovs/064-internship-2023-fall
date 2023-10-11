@@ -1,4 +1,4 @@
-import { CounterColor } from "../redux/counter/types.ts";
+import { CounterColor } from "../../redux/counter/types.ts";
 import RadioButtonClass from "./RadioButtonClass.tsx";
 import { RadioButtonFunction } from "./RadioButtonFunction.tsx";
 
