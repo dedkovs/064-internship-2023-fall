@@ -10,12 +10,12 @@ type Props = {
   color: CounterColor;
   theme: ThemeState;
   counterColor: CounterColor;
-  changeColor: (color: CounterColor) => void;
+  counterChangeColor: (color: CounterColor) => void;
 };
 
 class RadioButton extends Component<Props> {
   render() {
-    const { color, theme, counterColor, changeColor } = this.props;
+    const { color, theme, counterColor, counterChangeColor } = this.props;
 
     return (
       <label
@@ -28,7 +28,7 @@ class RadioButton extends Component<Props> {
           type={"radio"}
           value={color}
           checked={counterColor === color}
-          onChange={() => changeColor(color)}
+          onChange={() => counterChangeColor(color)}
         />
         {color}
       </label>
@@ -44,7 +44,7 @@ const mapStateToProps = (state: AppState) => {
 };
 
 const mapDispatchToProps = {
-  changeColor: counterChangeColor,
+  counterChangeColor,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RadioButton);
