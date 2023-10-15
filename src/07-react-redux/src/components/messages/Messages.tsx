@@ -24,14 +24,11 @@ export const Messages = () => {
     isStale,
   } = useMessages();
 
-  const { mutateAsync } = useMutationPostMessage();
+  const { mutate: postMessage, isLoading: isPostingMessage } =
+    useMutationPostMessage();
 
   const isDeletingMessage = useIsMutating({
     mutationKey: ["deleteMessage"],
-  });
-
-  const isPostingMessage = useIsMutating({
-    mutationKey: ["postMessage"],
   });
 
   useEffect(() => {
@@ -44,7 +41,7 @@ export const Messages = () => {
     if (isDeletingMessage > 0) {
       setStatusMessage("Deleting message...");
     }
-    if (isPostingMessage > 0) {
+    if (isPostingMessage) {
       setStatusMessage("Posting message...");
     }
     if (isLoadingMessagesError) {
@@ -59,12 +56,12 @@ export const Messages = () => {
     isLoadingMessagesError,
   ]);
 
-  const sendMessageHandler = async () => {
+  const sendMessageHandler = () => {
     if (inputRef.current?.value.trim() === "") {
       setStatusMessage("Please write something");
     } else {
       setStatusMessage("");
-      await mutateAsync(inputRef.current?.value!);
+      postMessage(inputRef.current?.value!);
     }
   };
 

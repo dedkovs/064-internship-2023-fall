@@ -5,8 +5,8 @@ export const FetchCharactersButton = () => {
 
   return (
     <button
-      onClick={async () =>
-        await queryClient.invalidateQueries({
+      onClick={() =>
+        queryClient.invalidateQueries({
           queryKey: ["character"],
         })
       }

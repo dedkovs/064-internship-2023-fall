@@ -20,8 +20,8 @@ export const CharacterImages = () => {
   return (
     <div className={"characterImagesContainer"}>
       {counter > 0 &&
-        Array.from(Array(counter).keys()).map((character, i) => {
-          return <CharacterImage key={character} index={i} />;
+        Array.from(Array(counter).keys()).map((i) => {
+          return <CharacterImage key={i} index={i} />;
         })}
     </div>
   );

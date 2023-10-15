@@ -1,7 +1,12 @@
 import { QueryFunctionContext, useQuery } from "@tanstack/react-query";
 
-const fetchCharacter = async (context: QueryFunctionContext) => {
-  const [, index] = context.queryKey as [string, number];
+type QueryKey = [string, { index: number }];
+type Character = { index: number; imgSrc: Blob };
+
+const fetchCharacter = async (
+  context: QueryFunctionContext<QueryKey>,
+): Promise<Character> => {
+  const { index } = context.queryKey[1];
 
   return await fetch(
     `https://rickandmortyapi.com/api/character/${Math.floor(
@@ -30,5 +35,4 @@ export const useCharacter = (index: number) =>
     staleTime: Infinity,
     refetchOnWindowFocus: false,
     retry: 0,
-    // cacheTime: 0,
   });

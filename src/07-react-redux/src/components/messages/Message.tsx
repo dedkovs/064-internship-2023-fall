@@ -6,7 +6,6 @@ import { DeleteMessageButton } from "./DeleteMessageButton.tsx";
 import { EditMessageButton } from "./EditMessageButton.tsx";
 import { useEffect, useRef, useState } from "react";
 import { useMutationEditMessage } from "../../react-query/useMutationEditMessage.ts";
-import { useIsMutating } from "@tanstack/react-query";
 import { useMutationDeleteMessage } from "../../react-query/useMutationDeleteMessage.ts";
 
 type Props = {
@@ -21,22 +20,17 @@ export const Message = ({ message, id }: Props) => {
 
   const [editingMode, setEditingMode] = useState(false);
 
-  const { mutateAsync: editMessage } = useMutationEditMessage(id);
-  const { mutateAsync: deleteMessage } = useMutationDeleteMessage(id);
+  const { mutate: editMessage, isLoading: isEditingMessage } =
+    useMutationEditMessage(id);
 
-  const isEditingMessage = useIsMutating({
-    mutationKey: ["editMessage", { id }],
-  });
-
-  const isDeletingMessage = useIsMutating({
-    mutationKey: ["deleteMessage", { id }],
-  });
+  const { mutate: deleteMessage, isLoading: isDeletingMessage } =
+    useMutationDeleteMessage(id);
 
   useEffect(() => {
     editingInputRef.current?.focus();
   }, [editingMode]);
 
-  const onEditMessage = async () => {
+  const onEditMessage = () => {
     if (editingMode) {
       setEditingMode(false);
       if (
@@ -44,35 +38,35 @@ export const Message = ({ message, id }: Props) => {
         editingInputRef.current?.value.trim() !== "" &&
         message !== editingInputRef.current.value
       ) {
-        await editMessage({ id, message: editingInputRef.current?.value });
+        editMessage({ id, message: editingInputRef.current?.value });
       }
     } else {
       setEditingMode(true);
     }
   };
 
-  const onDeleteMessage = async () => {
+  const onDeleteMessage = () => {
     if (editingMode) {
       setEditingMode(false);
     }
-    await deleteMessage(id);
+    deleteMessage(id);
   };
 
   const getBackgroundColor = () => {
     if (theme === ThemeState.Dark) {
-      if (isDeletingMessage > 0) {
+      if (isDeletingMessage) {
         return COLORS.darkPink;
       }
-      if (isEditingMessage > 0) {
+      if (isEditingMessage) {
         return COLORS.darkGreen;
       }
       return COLORS.darkGrey;
     }
     if (theme === ThemeState.Light) {
-      if (isDeletingMessage > 0) {
+      if (isDeletingMessage) {
         return COLORS.lightPink;
       }
-      if (isEditingMessage > 0) {
+      if (isEditingMessage) {
         return COLORS.lightGreen;
       }
       return COLORS.lightGrey;
@@ -94,9 +88,9 @@ export const Message = ({ message, id }: Props) => {
 
       <DeleteMessageButton onDeleteMessage={onDeleteMessage} />
 
-      {isEditingMessage > 0
+      {isEditingMessage
         ? "Updating message..."
-        : isDeletingMessage > 0
+        : isDeletingMessage
         ? "Deleting message..."
         : message}
 
