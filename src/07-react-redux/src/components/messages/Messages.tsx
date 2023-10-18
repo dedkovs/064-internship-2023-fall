@@ -19,9 +19,7 @@ export const Messages = () => {
   const {
     data: messages,
     isFetching,
-    isLoading,
     isError: isLoadingMessagesError,
-    isStale,
   } = useMessages();
 
   const { mutate: postMessage, isLoading: isPostingMessage } =
@@ -32,10 +30,8 @@ export const Messages = () => {
   });
 
   useEffect(() => {
-    if (isStale) {
-      setStatusMessage("");
-    }
-    if (isFetching || isLoading) {
+    setStatusMessage("");
+    if (isFetching) {
       setStatusMessage("Loading messages...");
     }
     if (isDeletingMessage > 0) {
@@ -47,14 +43,7 @@ export const Messages = () => {
     if (isLoadingMessagesError) {
       setStatusMessage("Something went wrong, please try later");
     }
-  }, [
-    isStale,
-    isFetching,
-    isLoading,
-    isDeletingMessage,
-    isPostingMessage,
-    isLoadingMessagesError,
-  ]);
+  }, [isFetching, isDeletingMessage, isPostingMessage, isLoadingMessagesError]);
 
   const sendMessageHandler = () => {
     if (inputRef.current?.value.trim() === "") {
